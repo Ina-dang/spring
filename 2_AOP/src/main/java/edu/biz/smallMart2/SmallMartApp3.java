@@ -9,10 +9,11 @@ public class SmallMartApp3 {
 		System.out.println("=========================");
 		
 		//겟빈으로 가ㅕ온 마트
-		SmallMart mart2 = ctx.getBean("mart4", SmallMart.class);
+		SmallMart mart1 = ctx.getBean("mart2", SmallMart.class);
+		SmallMart mart2 = ctx.getBean("mart2", SmallMart.class);
 		try {
-			mart2.getProduct2("우유");
-			mart2.getProduct2("까까");
+			mart1.getProduct("우유");
+			mart1.getProduct2("까까");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
