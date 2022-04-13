@@ -23,6 +23,4 @@
 	
 	<context:component-scan base-package="com.inadang.controller" />
 	
-	
-	
 </beans:beans>
