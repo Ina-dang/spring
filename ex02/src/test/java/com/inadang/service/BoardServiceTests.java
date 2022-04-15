@@ -1,11 +1,10 @@
-package com.inadang.mapper;
+package com.inadang.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,41 +19,44 @@ import lombok.extern.log4j.Log4j;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
-public class BoardMapperTests {
+public class BoardServiceTests {
 	@Setter @Autowired
-	private BoardMapper boardMapper;
+	private BoardService boardService;
 	
-	@Test 
+	@Test
 	public void testExist(){
-		assertNotNull(boardMapper);
+		assertNotNull(boardService);
 	}
 	
 	@Test
 	public void testGetList(){
-		List<BoardVO> result = boardMapper.getList();
+		List<BoardVO> result = boardService.getList();
 		assertNotNull(result);
 		result.forEach(log::info);
 	}
 	
 	@Test
-	public void TestRead(){
-		BoardVO result = boardMapper.read(3L);
+	public void testGet(){
+		BoardVO result = boardService.get(2L);
 		assertNotNull(result);
 		log.info(result);
 	}
 	
-	//191테스트
 	@Test
-	public void testInsert(){
+	public void testRegister(){
+		//init
 		BoardVO board = new BoardVO();
 		board.setTitle("새로 작성하는 글");
 		board.setContent("새로 작성하는 내용");
-		board.setWriter("newbie");
-
+		board.setWriter("inadang");
+		
+		//expect
 		log.info(board);
 		
 		int exp = 1;
-		int result = boardMapper.insert(board);
+		
+		//result
+		int result = boardService.register(board);
 		
 		assertEquals("게시글추가", exp, result);
 		
@@ -62,48 +64,31 @@ public class BoardMapperTests {
 	}
 	
 	@Test
-	public void testInsertSelectKey(){
-		BoardVO board = new BoardVO();
-		board.setTitle("새로 작성하는 글");
-		board.setContent("새로 작성하는 내용");
-		board.setWriter("newbie");
-		
-		log.info(board);
-		
-		int exp = 1;
-		int result = boardMapper.insertSelectKey(board);
-		
-		assertEquals("게시글추가", exp, result);
-		
-		log.info(board);
-	}
-	
-	@Test
-	public void testUpdate(){
-		BoardVO boardVO = new BoardVO();
-		boardVO.setBno(2L);
-		boardVO.setTitle("test update");
-		boardVO.setContent("test update");
+	public void testModify(){
+		BoardVO boardVO = boardService.get(48L);
+		log.info(boardVO);
+		boardVO.setTitle("service test modify");
 		log.info(boardVO);
 		
-		int exp = 1;
+		boolean exp = true;
 		
-		int result = boardMapper.update(boardVO);
+		boolean result = boardService.modify(boardVO);
 		
-		assertEquals("게시글 수정", exp, result);
+		assertEquals("게시글수정", exp, result);
 		log.info(boardVO);
 	}
 	
 	@Test
 	public void testDelete(){
-		Long bno = 4L;
+		Long bno = 59L;
 		log.info(bno);
 		
-		int exp = 1;
+		boolean exp = true;
 		
-		int result = boardMapper.delete(bno);
+		boolean result = boardService.remove(bno);
 		
-		assertEquals("게시글 삭제", exp, result);
-		log.info(bno);
+		assertEquals("게시글삭제", exp, result);
 	}
+	
+	
 }

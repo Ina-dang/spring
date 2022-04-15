@@ -14,7 +14,15 @@ public interface BoardMapper {
 	public BoardVO read(Long bno);
 	
 	// 189 페이지 DML은 void 노노해
+	//갯수를 세온다같은거는 여기서 @Select처리해도됨
+//	@Select("INSERT INTO TBL_BOARD(BNO, TITLE, CONTENT, WRITER)"
+//			+ "VALUES (SEQ.BOARD.NEXTVAL, #{title}, #{content}, #{writer})"
+//			)	
 	public int insert(BoardVO boardVO);
 	public int insertSelectKey(BoardVO boardVO);
-
+	
+	//196페이지
+	public int update (BoardVO boardVO);
+	//194페이지
+	public int delete (Long Bno);
 }
