@@ -8,9 +8,25 @@
 <title>Insert title here</title>
 <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(function() {
+	var result = '${result}';
+	check(result);
+	function check(result) {
+		if(!result || history.state) return;
+		
+		if (parseInt(result) > 0) {
+			alert(result + '번 게시글이 작성되었습니다');
+		}
+	}
+	history.replaceState({}, null, null);
+});
+</script>
 </head>
 <body>
 	<h1>list page</h1>
+	<a href="register">글작성</a>
 	<table border="1"> 
 		<tr>
 			<th>bno</th>
@@ -23,7 +39,7 @@
 		<c:forEach items="${boards}" var="b">
 		<tr>
 			<td>${b.bno}</td>
-			<td><a href="get?bno=${bno}">${b.title}</a></td>
+			<td><a href="get?bno=${b.bno}">${b.title}</a></td>
 			<td>${b.writer}</td>
 			<td>${b.regDate}</td>
 			<td>${b.updateDate}</td>

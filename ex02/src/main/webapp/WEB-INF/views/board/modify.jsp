@@ -10,21 +10,24 @@
 <link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
 </head>
 <body>
-	<h1>Board Read</h1>
+	<h1>Modify</h1>
+	${board}
 	<form method=post>
+		<input type="hidden" name="bno" value="${board.bno}"> 
 		<h4><label for="title">title</label></h4>
-		<input id="title" name="title" value="${board.title}" readonly>
+		<input id="title" name="title" value="${board.title}">
 		
 		<h4><label for="content">content</label></h4>
-		<textarea rows="20" cols="40" name="content" id="content" readonly>${board.content}</textarea>
+		<textarea rows="20" cols="40" name="content" id="content" >${board.content}</textarea>
 		
 		
 		<h4><label for="writer">writer</label></h4>
-		<input id="writer" name="writer" value="${board.writer}" readonly>
+		<input id="writer" name="writer" value="${board.writer}">
 		
 		<hr>
-		<a href="modify?bno=${board.bno}" >수정</button>
-		<a href="list" >취소</button>
+		<button type="submit">수정</button>
+		<button type="submit" formaction="remove">삭제</button>
+		<button type="reset">취소</button>
 	</form>
 </body>
 </html>

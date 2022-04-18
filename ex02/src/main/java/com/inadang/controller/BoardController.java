@@ -32,6 +32,11 @@ public class BoardController {
 		return boardService.getList();
 	}
 	
+	@GetMapping("register")
+	public void register(){
+		//register 메서드명 겹치지만 오버라이딩 해서 얼마든지 사용 가넝
+		//아래는 리다이렉트지만 얘는 포워딩할거라 jsp필요
+	}
 	
 	@PostMapping("register")
 	public String register(BoardVO boardVO, RedirectAttributes rttr){
@@ -40,7 +45,7 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	@GetMapping("get")
+	@GetMapping({"get", "modify"})
 	public void get(Long bno, Model model ){
 		model.addAttribute("board", boardService.get(bno));
 	}

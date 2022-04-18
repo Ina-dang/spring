@@ -6,25 +6,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
-<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
 </head>
 <body>
-	<h1>Board Read</h1>
+	<h1>Board Register</h1>
 	<form method=post>
 		<h4><label for="title">title</label></h4>
-		<input id="title" name="title" value="${board.title}" readonly>
+		<input id="title" name="title">
 		
 		<h4><label for="content">content</label></h4>
-		<textarea rows="20" cols="40" name="content" id="content" readonly>${board.content}</textarea>
+		<textarea rows="20" cols="40" name="content" id="content"></textarea>
 		
 		
 		<h4><label for="writer">writer</label></h4>
-		<input id="writer" name="writer" value="${board.writer}" readonly>
+		<input id="writer" name="writer">
 		
 		<hr>
-		<a href="modify?bno=${board.bno}" >수정</button>
-		<a href="list" >취소</button>
+		<button type="submit">작성</button>
+		<button type="reset">취소</button>
 	</form>
 </body>
 </html>
