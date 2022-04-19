@@ -23,11 +23,12 @@
 		
 		<h4><label for="writer">writer</label></h4>
 		<input id="writer" name="writer" value="${board.writer}">
-		
+		<input type="hidden" name="pageNum" value="${cri.pageNum}">
+		<input type="hidden" name="amount" value="${cri.amount}">
 		<hr>
 		<button type="submit">수정</button>
 		<button type="submit" formaction="remove">삭제</button>
-		<button type="reset">취소</button>
+		<a href="list${cri.params}">취소</a>
 	</form>
 </body>
 </html>

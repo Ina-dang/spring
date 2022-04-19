@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.inadang.domain.BoardVO;
+import com.inadang.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -33,6 +34,16 @@ public class BoardMapperTests {
 	public void testGetList(){
 		List<BoardVO> result = boardMapper.getList();
 		assertNotNull(result);
+		result.forEach(log::info);
+	}
+	
+	@Test
+	public void testGetListWithPaging(){
+		Criteria cri = new Criteria();
+		log.info(cri);
+		
+		List<BoardVO> result = boardMapper.getListWithPaging(cri);
+		assertNotNull(cri);
 		result.forEach(log::info);
 	}
 	
@@ -92,6 +103,11 @@ public class BoardMapperTests {
 		
 		assertEquals("게시글 수정", exp, result);
 		log.info(boardVO);
+	}
+	
+	@Test
+	public void testGetTotalCount(){
+		log.info(boardMapper.getTotalCount(new Criteria()));
 	}
 	
 	@Test

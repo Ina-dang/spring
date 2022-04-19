@@ -18,7 +18,8 @@
 		
 		
 		<h4><label for="writer">writer</label></h4>
-		<input id="writer" name="writer">
+		<input id="writer" name="writer" >
+		<input type="hidden" id="amount" name="amount" value="${cri.amount}">
 		
 		<hr>
 		<button type="submit">작성</button>

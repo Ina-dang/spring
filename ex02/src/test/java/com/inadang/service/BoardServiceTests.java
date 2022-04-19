@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.inadang.domain.BoardVO;
+import com.inadang.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -30,7 +31,8 @@ public class BoardServiceTests {
 	
 	@Test
 	public void testGetList(){
-		List<BoardVO> result = boardService.getList();
+		Criteria cri = new Criteria();
+		List<BoardVO> result = boardService.getList(cri);
 		assertNotNull(result);
 		result.forEach(log::info);
 	}
@@ -76,6 +78,11 @@ public class BoardServiceTests {
 		
 		assertEquals("게시글수정", exp, result);
 		log.info(boardVO);
+	}
+	
+	@Test
+	public void testGetTotalCount(){
+		log.info(boardService.getTotalCount(new Criteria()));
 	}
 	
 	@Test

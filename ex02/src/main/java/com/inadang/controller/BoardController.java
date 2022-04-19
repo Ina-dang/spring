@@ -5,64 +5,81 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.inadang.domain.BoardVO;
+import com.inadang.domain.Criteria;
+import com.inadang.domain.PageDTO;
 import com.inadang.service.BoardService;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
 
 @Controller
 @RequestMapping("board/*")
 @AllArgsConstructor
+@Log4j
 public class BoardController {
 	//롬복 Data해도 final args 생성해서 빈설정해줌. 
 	private final BoardService boardService;
 	
 	@GetMapping("list")
-	public void list(Model model){
-		model.addAttribute("boards", boardService.getList());
+	public String list(Model model, Criteria cri){
+		model.addAttribute("boards", boardService.getList(cri));
+		model.addAttribute("page", new PageDTO(boardService.getTotalCount(cri), cri));
+		return "/board/list";
 	}
 	
 	@GetMapping("list2") @ResponseBody
-	public List<BoardVO> list(){
-		return boardService.getList();
+	public List<BoardVO> list(@ModelAttribute("cri") Criteria cri){
+		return boardService.getList(cri);
 	}
 	
 	@GetMapping("register")
-	public void register(){
+	public void register(Criteria cri){
 		//register 메서드명 겹치지만 오버라이딩 해서 얼마든지 사용 가넝
 		//아래는 리다이렉트지만 얘는 포워딩할거라 jsp필요
+		
 	}
 	
 	@PostMapping("register")
-	public String register(BoardVO boardVO, RedirectAttributes rttr){
+	public String register(BoardVO boardVO, RedirectAttributes rttr, Criteria cri){
 		boardService.register(boardVO);
 		rttr.addFlashAttribute("result", boardVO.getBno());
+		rttr.addAttribute("pageNum", 1);
+		rttr.addAttribute("amount", cri.getAmount());
 		return "redirect:/board/list";
 	}
 	
 	@GetMapping({"get", "modify"})
-	public void get(Long bno, Model model ){
+	public void get(Long bno, Criteria cri, Model model ){
 		model.addAttribute("board", boardService.get(bno));
+		model.addAttribute("boards", boardService.get(bno));
+		model.addAttribute("cri", cri); //별칭줘서 get.jsp 에 criteria 대신 ${cri}로 검색가능, 안하면 bean이름 따라감
 	}
 	
 	@PostMapping("modify")
-	public String modify(BoardVO boardVO, RedirectAttributes rttr){
+	public String modify(BoardVO boardVO, RedirectAttributes rttr, Criteria cri){
+		log.info(cri);
 		if(boardService.modify(boardVO)){
 			rttr.addFlashAttribute("result", "success");
 		}
-		return "redirect:/board/list";
+//		rttr.addAllAttributes(new ObjectMapper().convertValue(cri, Map.class));
+		return "redirect:/board/list" + cri.getParams();
 	}
 	
 	@PostMapping("remove")
-	public String remove(Long bno, RedirectAttributes rttr){
+	public String remove(Long bno, RedirectAttributes rttr,Criteria cri){
+		log.info(cri);
 		if(boardService.remove(bno)){
 			rttr.addFlashAttribute("result", "success");
 		}
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amout", cri.getAmount());
 		return "redirect:/board/list";
 	}
 }

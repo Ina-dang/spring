@@ -11,6 +11,10 @@
 </head>
 <body>
 	<h1>Board Read</h1>
+	cri : ${cri}
+	<br>
+	criteria : ${criteria}
+	<br>
 	<form method=post>
 		<h4><label for="title">title</label></h4>
 		<input id="title" name="title" value="${board.title}" readonly>
@@ -23,8 +27,8 @@
 		<input id="writer" name="writer" value="${board.writer}" readonly>
 		
 		<hr>
-		<a href="modify?bno=${board.bno}" >수정</button>
-		<a href="list" >취소</button>
+		<a href="modify${cri.params}&bno=${board.bno}" >수정</button>
+		<a href="list" >목록</button>
 	</form>
 </body>
 </html>

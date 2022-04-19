@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Select;
 
 import com.inadang.domain.BoardVO;
+import com.inadang.domain.Criteria;
 
 public interface BoardMapper {
 //	@Select("SELECT * FROM TBL_BOARD WHERE BNO > 0")
@@ -25,4 +26,8 @@ public interface BoardMapper {
 	public int update (BoardVO boardVO);
 	//194페이지
 	public int delete (Long Bno);
+	
+	public List<BoardVO> getListWithPaging(Criteria cri);
+
+	public int getTotalCount(Criteria cri);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.inadang.domain.BoardVO;
+import com.inadang.domain.Criteria;
 import com.inadang.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
@@ -36,7 +37,15 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<BoardVO> getList() {
-		return boardMapper.getList();
+	public List<BoardVO> getList(Criteria cri) {
+		return boardMapper.getListWithPaging(cri);
 	}
+
+	@Override
+	public int getTotalCount(Criteria cri) {
+		// TODO Auto-generated method stub
+		return boardMapper.getTotalCount(cri);
+	}
+	
+	
 }

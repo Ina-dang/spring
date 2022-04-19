@@ -9,6 +9,25 @@
   		SELECT * FROM TBL_BOARD WHERE 0 < BNO
   		]]>
   	</select>
+  	<select id="getListWithPaging" resultType="board">
+  		<![CDATA[
+  		SELECT * FROM (
+		    SELECT 
+		        /*+ INDEX_DESC(TBL_BOARD BOARD_PK)*/
+		        ROWNUM RN,
+		        BNO,
+		        TITLE,
+		        CONTENT,
+		        WRITER,
+		        REGDATE,
+		        UPDATEDATE
+		    FROM
+		        TBL_BOARD
+		    WHERE ROWNUM <= #{pageNum} * #{amount}
+		)
+		WHERE RN > (#{pageNum} - 1) * #{amount}
+  		]]>
+  	</select>
   	<select id="read" resultType="board">
   		SELECT * FROM TBL_BOARD WHERE BNO = #{bno}
   	</select>
@@ -30,6 +49,9 @@
   			updateDate = sysdate
 		 WHERE bno = #{bno}
   	</update>
+  	<select id="getTotalCount" resultType="int">
+  		SELECT COUNT(*) FROM TBL_BOARD WHERE BNO > 0
+  	</select>
   	<delete id="delete">
 		DELETE TBL_BOARD WHERE BNO = #{bno}  	
   	</delete>

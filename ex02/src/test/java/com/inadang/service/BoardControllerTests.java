@@ -44,7 +44,10 @@ public class BoardControllerTests {
 	
 	@Test
 	public void testList() throws Exception{
-		ModelMap map = mockMvc.perform(MockMvcRequestBuilders.get("/board/list"))
+		ModelMap map = mockMvc.perform(MockMvcRequestBuilders
+					.get("/board/list")
+					.param("pageNum", "4")
+					.param("amount", "15"))
 				.andReturn()
 				.getModelAndView()
 				.getModelMap();

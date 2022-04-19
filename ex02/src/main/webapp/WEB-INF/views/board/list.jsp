@@ -26,7 +26,7 @@ $(function() {
 </head>
 <body>
 	<h1>list page</h1>
-	<a href="register">글작성</a>
+	<a href="register${page.cri.params}" >글작성</a>
 	<table border="1"> 
 		<tr>
 			<th>bno</th>
@@ -39,12 +39,21 @@ $(function() {
 		<c:forEach items="${boards}" var="b">
 		<tr>
 			<td>${b.bno}</td>
-			<td><a href="get?bno=${b.bno}">${b.title}</a></td>
+			<td><a href="get${page.cri.params}&bno=${b.bno}">${b.title}</a></td>
 			<td>${b.writer}</td>
 			<td>${b.regDate}</td>
 			<td>${b.updateDate}</td>
 		</tr>
 		</c:forEach>
 	</table>
+	<c:if test="${page.prev}">
+		<a href="list?pageNum=${page.start-1}&amount=${page.cri.amount}">prev</a>
+	</c:if>
+	<c:forEach begin="${page.start}" end="${page.end}" var="p">
+			<a href="list?pageNum=${p}&amount=${page.cri.amount}">${p}</a>
+	</c:forEach>
+	<c:if test="${page.next}">
+		<a href="list?pageNum=${page.end+1}&amount=${page.cri.amount}">next</a>
+	</c:if>
 </body>
 </html>
