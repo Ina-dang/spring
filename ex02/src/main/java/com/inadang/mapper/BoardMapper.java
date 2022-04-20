@@ -30,4 +30,6 @@ public interface BoardMapper {
 	public List<BoardVO> getListWithPaging(Criteria cri);
 
 	public int getTotalCount(Criteria cri);
+	
+	public List<BoardVO> getListDynamicTest(Criteria cri);
 }

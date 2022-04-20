@@ -3,6 +3,7 @@ package com.inadang.mapper;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -40,6 +41,10 @@ public class BoardMapperTests {
 	@Test
 	public void testGetListWithPaging(){
 		Criteria cri = new Criteria();
+		cri.setPageNum(4);
+		cri.setAmount(5);
+		cri.setType("TW");
+		cri.setKeyword("user");
 		log.info(cri);
 		
 		List<BoardVO> result = boardMapper.getListWithPaging(cri);
@@ -107,7 +112,22 @@ public class BoardMapperTests {
 	
 	@Test
 	public void testGetTotalCount(){
-		log.info(boardMapper.getTotalCount(new Criteria()));
+		Criteria cri = new Criteria(); //초기값 부여 후 값 지정
+		cri.setPageNum(4);
+		cri.setAmount(5);
+		cri.setType("TW");
+		cri.setKeyword("user");
+		log.info(boardMapper.getTotalCount(cri));
+	}
+	
+	@Test
+	public void testGetListDynamicTest(){
+		Criteria cri = new Criteria();
+//		cri.setType("TC");
+		log.info(Arrays.toString(cri.getTypeArr()));
+//		cri.setType("T");
+		cri.setKeyword("테스트");
+		boardMapper.getListDynamicTest(cri).forEach(log::info);
 	}
 	
 	@Test
@@ -121,5 +141,11 @@ public class BoardMapperTests {
 		
 		assertEquals("게시글 삭제", exp, result);
 		log.info(bno);
+	}
+	
+	@Test
+	public void testStringJoin(){
+		String[] arr = {"1","21","3","4"};
+		log.info(String.join("", arr));
 	}
 }
