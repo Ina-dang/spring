@@ -2,7 +2,6 @@ package com.inadang.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Service;
 
 import com.inadang.domain.CriteriaReply;
@@ -16,8 +15,7 @@ public class ReplyServiceImpl implements ReplyService{
 	private ReplyMapper mapper;
 	@Override
 	public int register(ReplyVO vo) {
-		// TODO Auto-generated method stub
-		return mapper.insert(vo);
+		return mapper.insertSelectKey(vo);
 	}
 
 	@Override
@@ -43,5 +41,4 @@ public class ReplyServiceImpl implements ReplyService{
 		// TODO Auto-generated method stub
 		return mapper.getListWithPaging(bno, cri);
 	}
-	
 }

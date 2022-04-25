@@ -50,11 +50,96 @@
 							</form>
                         </div>
                     </div>
-                </div>
-                <!-- /.container-fluid -->
+					<!-- 본문끝 -->
+					<!-- 댓글 -->
+					<div class="card shadow mb-4">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary float-left">댓글</h6>       
+						</div>
+						<!-- 댓글작성 -->						
+						<div class="input-group p-3" >
+							<textarea class="form-control" style='resize:none' placeholder="댓글을 입력해주세요"></textarea>
+							<div class="input-group-append">
+								<button type="button" class="btn btn-primary">작성</button>
+							</div>
+						</div>
+						<div class="card-body list-group p-3 chat">
+							<div class="list-group-item p-0 bg-secondary text-white p-3">
+								<strong>작성자</strong>
+								<small class="float-right">게시일</small>
+							</div>
+							<p class="p-3 list-group-item mb-0">글내용</p>
+							<div class="list-group-item p-0 bg-secondary text-white p-3">
+								<strong>작성자</strong>
+								<small class="float-right">게시일</small>
+							</div>
+							<p class="p-3 list-group-item mb-0">글내용</p>
+							<div class="list-group-item p-0 bg-secondary text-white p-3">
+								<strong>작성자</strong>
+								<small class="float-right">게시일</small>
+							</div>
+							<p class="p-3 list-group-item mb-0">글내용</p>
+						</div>
+					</div>
+				</div>
+            <!-- 댓글끝 -->
             </div>
             <!-- End of Main Content -->
  			<jsp:include page="../common/footer.jsp"/> 
+ 			<script src="/resources/js/reply.js"></script>
+ 			<script type="text/javascript">
+ 				var bno = '${board.bno}'
+ 				console.log(replyService);
+ 				
+ 				$(function(){
+ 					function showList(lastRno, amount){
+						var param = {bno: bno, lastRno: lastRno, amount: amount}
+ 		 				replyService.getList(param, function(result){
+	 					console.log(result);
+						var str = '';
+						 for(var i in result){
+							str += '<div class="list-group-item p-0 bg-secondary text-white p-3" data-rno="' + result[i].rno + '">';
+							str += '	<strong>' + result[i].replyer + '</strong>';
+							str += '	<small class="float-right">' + replyService.displayTime(result[i].replyDate) + '</small>';
+							str += '</div>';
+							str += '<p class="p-3 list-group-item mb-0">' + result[i].reply + '</p>';
+						}
+						// console.log(str);
+						$(".chat").html(str);
+ 		 				})
+ 					}
+					showList();
+ 				});
+ 				
+ 				
+ 				//replyService.add();
+ 						//성공함수, 실패함수
+ 				//reply, callback, error
+ 				
+ 				// 글 등록
+ 				/* replyService.add({bno:bno, reply:"get.jsp 작성 테스트", replyer:"작성자"}, function(result){
+ 					alert("글 등록 성공");
+ 					console.log(result);
+ 				}); */	
+ 						
+ 				 // 글 삭제
+/*   				 replyService.remove(8, function(result){
+ 					 alert("글 삭제 성공");
+ 					 console.log(result);
+ 				 })  */
+ 				 
+ 				 // 글 조회
+/*   				 replyService.get(5, function(result){
+ 					 alert("조회");
+					 console.log(result);
+ 				 })  */
+ 				 
+ 				 //글 수정
+/*  				 replyService.update({rno:5, reply:"get.jsp 수정 테스트"}, function(result){
+ 					alert("글 수정 성공");
+ 					console.log(result);
+ 				}); */
+ 			</script>
     	</div>
     	<!-- End of Content Wrapper -->
 	</div>

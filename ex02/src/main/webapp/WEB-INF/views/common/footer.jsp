@@ -43,7 +43,6 @@
 		        </div>
 		    </div>
 
-
     <!-- Bootstrap core JavaScript-->
     <script src="/resources/assets/vendor/jquery/jquery.min.js"></script>
     <script src="/resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -53,6 +52,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/resources/assets/js/sb-admin-2.min.js"></script>
-
+    
+    <!-- moment js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment-with-locales.min.js" ></script>
 </body>
 </html>

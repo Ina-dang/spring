@@ -8,6 +8,14 @@
 		VALUES (SEQ_REPLY.NEXTVAL, #{bno}, #{reply}, #{replyer})
 	</insert>
 	
+  	<insert id="insertSelectKey">
+	<selectKey keyProperty="rno" order="BEFORE" resultType="Long">
+		SELECT SEQ_REPLY.NEXTVAL FROM DUAL
+	</selectKey>  		
+		INSERT INTO TBL_REPLY (RNO, BNO, REPLY, REPLYER)
+		VALUES (#{rno}, #{bno}, #{reply}, #{replyer})
+  	</insert>
+  	
 	<select id="read" resultType="reply">
 		SELECT * FROM TBL_REPLY WHERE RNO = #{rno}
 	</select>

@@ -17,4 +17,6 @@ public interface ReplyMapper {
 	int update (ReplyVO vo);
 	
 	List<ReplyVO> getListWithPaging(@Param("bno") Long bno, @Param("cri") CriteriaReply cri);
+
+	int insertSelectKey(ReplyVO vo);
 }
