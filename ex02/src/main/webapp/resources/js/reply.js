@@ -23,7 +23,7 @@ var replyService = (function() {
         })
     }
     
-    var getList = function(param, callback, error){
+    var getList = function(param, callback, error, before, after){
         var bno = param.bno;
         var lastRno = param.lastRno || 0;
         var amount = param.amount || 10;
@@ -34,8 +34,18 @@ var replyService = (function() {
             url: url,
             type: "get",
             dataType: "json",
+            beforeSend : function(){
+            	if(before){
+            		before();
+            	}
+            },
             success: function(result, satatus, xhr) {
-                if(callback) callback(result);
+                if(callback){
+                	callback(result);
+                }
+                if(after){
+                	after(result);
+                }
             },
             error: function(xhr, status, er) {
                 if(error) error(er);
