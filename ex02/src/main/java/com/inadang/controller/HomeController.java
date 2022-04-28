@@ -34,7 +34,8 @@ public class HomeController {
 //		
 //		model.addAttribute("serverTime", formattedDate );
 		
-		return "redirect:/board/list";
+		return "redirect:/sample/all";
+//		return "redirect:/board/list";
 	}
 	
 	@GetMapping("ajax") //jsp호출목적

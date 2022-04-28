@@ -37,7 +37,8 @@
 		        CONTENT,
 		        WRITER,
 		        REGDATE,
-		        UPDATEDATE
+		        UPDATEDATE,
+		        REPLYCNT
 		    FROM
 		        TBL_BOARD
 		    WHERE 
@@ -115,4 +116,7 @@
   	<delete id="delete">
 		DELETE TBL_BOARD WHERE BNO = #{bno}  	
   	</delete>
+  	<update id="updateReplyCnt">
+  		UPDATE TBL_BOARD SET REPLYCNT = REPLYCNT + #{amount} WHERE BNO = #{bno}
+  	</update>
   </mapper>
