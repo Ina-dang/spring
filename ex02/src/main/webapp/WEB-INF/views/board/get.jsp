@@ -166,7 +166,8 @@
 					}
 
 					// 댓글 목록 조회
-					var lastRno;
+					var last
+;
 					var amount; //undefined
 
  					function showList(lastRno, amount){

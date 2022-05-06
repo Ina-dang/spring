@@ -1,0 +1,15 @@
+package edu.biz.smallMart2;
+
+public class SmallMartImpl implements SmallMart{
+
+	@Override
+	public void getProduct(String name) throws Exception {
+		System.out.printf("getProduct(%s)%n", name);
+//		throw new Exception("내가 만든 예외");
+	}
+	
+	public void getProduct2(String name) throws Exception {
+		System.out.printf("getProduct2(%s)%n", name);
+//		throw new Exception("내가 만든 예외");
+	}
+}

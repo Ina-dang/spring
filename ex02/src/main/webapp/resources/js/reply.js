@@ -14,7 +14,7 @@ var replyService = (function() {
             data:JSON.stringify(reply),
             dataType:"json",
             contentType:"application/json; charset=utf-8",
-            success : function(result, satatus, xhr) {
+            success : function(result, status, xhr) {
                 if(callback) callback(result);
             },
             error : function(xhr, status, er) {
@@ -39,7 +39,7 @@ var replyService = (function() {
             		before();
             	}
             },
-            success: function(result, satatus, xhr) {
+            success: function(result, status, xhr) {
                 if(callback){
                 	callback(result);
                 }
@@ -58,7 +58,7 @@ var replyService = (function() {
         $.ajax({
             url: "/replies/" + rno,
             type: "delete",
-            success: function(result, satatus, xhr) {
+            success: function(result, status, xhr) {
                 if(callback) callback(result);
             },
             error: function(xhr, status, er) {
@@ -74,7 +74,7 @@ var replyService = (function() {
             type:"put",
             data:JSON.stringify(reply),
             contentType:"application/json; charset=utf-8",
-            success : function(result, satatus, xhr) {
+            success : function(result, status, xhr) {
                 if(callback) callback(result);
             },
             error : function(xhr, status, er) {

@@ -53,7 +53,7 @@ public class BoardMapperTests {
 	}
 	
 	@Test
-	public void TestRead(){
+	public void testRead(){
 		BoardVO result = boardMapper.read(3L);
 		assertNotNull(result);
 		log.info(result);

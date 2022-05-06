@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- Setter Injection
+	<bean class="edu.biz.ioc4.Money" id="money">
+		<property name="amount">
+			<value>1500</value>
+		</property>
+	</bean> -->
+	
+	<!--Constructor Injection 
+	<bean class="edu.biz.ioc4.Money" id="money">
+		<constructor-arg>
+			<value>1500</value>
+		</constructor-arg>
+	</bean> -->
+
+
+	<!-- <bean class="edu.biz.ioc4.Money" id="money" p:amount="2000"/> -->
+	<bean class="edu.biz.ioc4.Money" id="money" c:amount="2000"/>
+	
+
+	<bean class="edu.biz.ioc4.Car" id="car">
+		<property name="name">
+			<value>k7</value>
+		</property>
+	</bean>
+
+	<bean class="edu.biz.ioc4.KiaMaker" id="kiaMaker"  p:car-ref="car">
+<!-- 		<property name="car">
+			<ref bean="car"/> 컨트롤 클릭하면 car 바라봄
+		</property> -->
+		
+	</bean>
+	<bean class="edu.biz.ioc4.HyundaiMaker" id="hyundaiMaker">
+		<property name="car">
+			<bean class="edu.biz.ioc4.Car">
+				<property name="name" value="sonata"/>
+			</bean>
+		</property>
+	</bean>
+	<bean class="edu.biz.ioc4.DaewooMaker" id="daewooMaker">
+		<property name="car">
+			<bean class="edu.biz.ioc4.Car">
+				<property name="name" ref="tosca"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean class="java.lang.String" id="tosca"	> 
+		<constructor-arg value="tosca"></constructor-arg>
+	</bean>
+
+	<bean class="edu.biz.ioc4.OrderManager" id="orderManager" scope="singleton"> 
+		<property name="maker"> <!-- OrderManager 자바 필드에 있음  -->
+			<ref bean="daewooMaker"/> <!-- 참조자료형이라 ref쓰고 beanId인 애 가져와야함-->
+<!-- 			<ref bean="hyundaiMaker"/>
+			<ref bean="kiaMaker"/> -->
+		</property>
+		<property name="money" ref="money"/> <!-- ref 하나면 이렇게 쓸 수도 있다 -->
+	</bean>
+</beans>
