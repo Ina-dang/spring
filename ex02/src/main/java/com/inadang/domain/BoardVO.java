@@ -1,6 +1,8 @@
 package com.inadang.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
@@ -16,4 +18,6 @@ public class BoardVO {
 	private Date RegDate;
 	private Date updateDate;
 	private String replyCnt;
+	
+	List<BoardAttachVO> attachs = new ArrayList<>();
 }

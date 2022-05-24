@@ -61,7 +61,7 @@
 			SELECT SEQ_BOARD.NEXTVAL FROM DUAL
 		</selectKey>  		
   		INSERT INTO tbl_board (BNO, TITLE, CONTENT, WRITER) 
-		VALUES (SEQ_BOARD.NEXTVAL, #{title}, #{content}, #{writer})
+		VALUES (#{bno}, #{title}, #{content}, #{writer})
   	</insert>
   	<update id="update">
   		UPDATE tbl_board set

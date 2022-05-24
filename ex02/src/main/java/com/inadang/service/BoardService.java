@@ -2,6 +2,7 @@ package com.inadang.service;
 
 import java.util.List;
 
+import com.inadang.domain.BoardAttachVO;
 import com.inadang.domain.BoardVO;
 import com.inadang.domain.Criteria;
 
@@ -19,4 +20,7 @@ public interface BoardService {
 
 	int getTotalCount(Criteria cri);
 	//스프링 마이바티스가 mapper클래스에서는 대신해줬음
+	
+	List<BoardAttachVO> getAttaches(long bno);
+	//findby용
 }

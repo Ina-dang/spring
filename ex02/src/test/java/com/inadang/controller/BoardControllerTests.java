@@ -13,11 +13,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.inadang.domain.BoardVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -109,7 +106,7 @@ public class BoardControllerTests {
 	
 	@Test
 	public void testRemove() throws Exception { 
-	ModelAndView mav = mockMvc.perform(MockMvcRequestBuilders.post("/board/remove")
+		ModelAndView mav = mockMvc.perform(MockMvcRequestBuilders.post("/board/remove")
 				.param("bno", "61")
 				)
 			.andReturn()

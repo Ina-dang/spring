@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.inadang.mapper.MemberMapper">
+
+	<insert id="insertMember">
+		INSERT INTO TBL_MEMBER(USERID, USERPW, USERNAME)
+		VALUES (#{userid}, #{userpw}, #{username})
+	</insert>
+	<insert id="insertAuth">
+		INSERT INTO TBL_MEMBER_AUTH(USERID, AUTH)
+		VALUES (#{userid}, #{auth})
+	</insert>
+			   <!-- Alias        map name-->
+	<resultMap type="member" id="memberMap">
+		<id property="userid" column="userid"/>
+		<result property="userid" column="userid"/>
+		<result property="userpw" column="userpw"/>
+		<result property="username" column="username"/>
+		<result property="enabled" column="enabled"/>
+		<result property="regDate" column="regDate"/>
+		<result property="updateDate" column="updateDate"/>
+		<collection property="auths" resultMap="authMap"/>
+	</resultMap>
+	
+	<resultMap type="auth" id="authMap">
+		<result property="userid" column="userid"/>
+		<result property="auth" column="auth"/>
+	</resultMap>
+	
+	<select id="read" resultMap="memberMap">
+		SELECT *
+		FROM tbl_member
+		JOIN tbl_member_auth 
+		USING (userid)
+		WHERE userid = #{userid} 
+	</select>
+
+</mapper>

@@ -96,6 +96,4 @@ public class BoardServiceTests {
 		
 		assertEquals("게시글삭제", exp, result);
 	}
-	
-	
 }

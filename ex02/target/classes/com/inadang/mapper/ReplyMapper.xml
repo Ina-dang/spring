@@ -23,6 +23,9 @@
 	<delete id="delete">
 		DELETE FROM TBL_REPLY WHERE RNO = #{rno}
 	</delete>
+	<delete id="deleteAll">
+		DELETE FROM TBL_REPLY WHERE BNO = #{bno}
+	</delete>
 	
 	<update id="update">
 		UPDATE TBL_REPLY SET

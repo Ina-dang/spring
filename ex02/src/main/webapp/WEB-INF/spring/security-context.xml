@@ -9,12 +9,12 @@
 	<bean class="com.inadang.security.CustomUserDetailsService" id="userDetailsService"></bean>
 	<security:http>
 		<security:form-login login-page="/member/login" />
-		<security:logout logout-url="/logout" />
-		<!-- <security:csrf disabled="true"/> -->
+		<security:logout logout-url="/logout" logout-success-url="/" />
+		<security:csrf disabled="true"/>
 		<security:intercept-url pattern="/sample/all" access="permitAll"/>
 		<security:intercept-url pattern="/sample/member" access="hasAnyRole('ROLE_MEMBER, ROLE_MANAGER')"/>
 		<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/>
-		<!-- <security:remember-me/> -->
+		<security:remember-me data-source-ref="dataSource"/>
 	</security:http>
 	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="userDetailsService">

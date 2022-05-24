@@ -3,23 +3,21 @@ package selenium;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class SeleniumTest {
+public class SeleniumTest(){
+	private final String WEB_DRIVER_ID = "webdriver.chrome.driver";
+	private final String WEB_DRIVER_PATH = "D:\\devtools\\chromedriver\\chromedriver.exe";
+	private String url = "http://localhost:9090/index";
 	private WebDriver driver;
 	
-	public static final String WEB_DRIIVER_ID = "webdriver.chrome.driver";
-	public static final String WEB_DRIIVER_PATH = "D:/devtools/chromedriver_win32/chromedriver.exe";
 	
-	private String base_url; 
-	
-	public SeleniumTest(){
-		System.setProperty(WEB_DRIIVER_ID, WEB_DRIIVER_PATH);
+	public SeleniumTest_lnh(){
+		System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 		
 		driver = new ChromeDriver();
-		base_url = "https://www.naver.com";
 	}
 	
 	public void crawl(){
-		driver.get(base_url);
+		driver.get(url);
 		System.out.println(driver.getPageSource());
 	}
 	

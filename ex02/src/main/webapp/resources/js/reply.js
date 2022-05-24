@@ -53,16 +53,18 @@ var replyService = (function() {
         })
     }
     
-    var remove = function(rno, callback, error) {
+    var remove = function(reply, callback, error) {
         console.log("remove()....")
         $.ajax({
-            url: "/replies/" + rno,
+            url: "/replies/" + reply.rno,
             type: "delete",
-            success: function(result, status, xhr) {
+            data:JSON.stringify(reply),
+            contentType:"application/json; charset=utf-8",
+            success: function(result, satatus, xhr) {
                 if(callback) callback(result);
             },
             error: function(xhr, status, er) {
-                if(error) error(er);
+                if(error) error(xhr);
             }
         })
     }
